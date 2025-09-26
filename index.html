@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three-Layer MLOps Architecture | Interactive Diagram</title>
+    <meta name="description" content="Learn how three-layer architecture reduces MLOps infrastructure costs by 99% while improving team productivity and environment consistency.">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #0077B5 0%, #00A0DC 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+        h1 {
+            text-align: center;
+            color: #0077B5;
+            margin-bottom: 15px;
+            font-size: 2.8em;
+            font-weight: 700;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.3em;
+            margin-bottom: 50px;
+            font-weight: 300;
+        }
+        
+        .problem-section {
+            background: linear-gradient(145deg, #ffebee, #ffcdd2);
+            border: 3px solid #d32f2f;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .problem-section h2 {
+            color: #d32f2f;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+        .problem-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .problem-item {
+            background: rgba(255,255,255,0.8);
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+        
+        .architecture-diagram {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 25px;
+            margin: 50px 0;
+        }
+        
+        .component {
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            min-height: 350px;
+            cursor: pointer;
+        }
+        .component:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+        }
+        .component h3 {
+            margin-bottom: 20px;
+            font-size: 1.6em;
+            font-weight: 600;
+        }
+        .layer-number {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .layer1 {
+            background: linear-gradient(145deg, #e8f5e8, #c8e6c9);
+            border: 3px solid #2e7d32;
+            color: #1b5e20;
+        }
+        .layer1 .layer-number {
+            background: #2e7d32;
+            color: white;
+        }
+        
+        .layer2 {
+            background: linear-gradient(145deg, #e3f2fd, #bbdefb);
+            border: 3px solid #1565c0;
+            color: #0d47a1;
+        }
+        .layer2 .layer-number {
+            background: #1565c0;
+            color: white;
+        }
+        
+        .layer3 {
+            background: linear-gradient(145deg, #fff3e0, #ffe0b2);
+            border: 3px solid #ef6c00;
+            color: #e65100;
+        }
+        .layer3 .layer-number {
+            background: #ef6c00;
+            color: white;
+        }
+        
+        .component-detail {
+            margin: 15px 0;
+            padding: 12px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 8px;
+            text-align: left;
+        }
+        .component-detail strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+        
+        .icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .flow-arrows {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+            font-size: 2.5em;
+            color: #666;
+            font-weight: bold;
+        }
+        
+        .results-section {
+            background: linear-gradient(145deg, #e0f2f1, #b2dfdb);
+            border: 3px solid #00695c;
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 50px;
+            text-align: center;
+        }
+        .results-section h2 {
+            color: #004d40;
+            margin-bottom: 25px;
+            font-size: 2.2em;
+        }
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .metric {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+        .metric:hover {
+            transform: translateY(-3px);
+        }
+        .metric-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #00695c;
+            display: block;
+        }
+        .metric-label {
+            color: #666;
+            font-size: 0.95em;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+        
+        .linkedin-cta {
+            background: linear-gradient(135deg, #0077B5, #00A0DC);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        .linkedin-cta h3 {
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        .linkedin-cta p {
+            font-size: 1.1em;
+            margin-bottom: 0;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #eee;
+            color: #666;
+        }
+        .footer a {
+            color: #0077B5;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .architecture-diagram {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .metrics-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            h1 {
+                font-size: 2.2em;
+            }
+            .subtitle {
+                font-size: 1.1em;
+            }
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Three-Layer MLOps Architecture</h1>
+        <p class="subtitle">How Configuration Separation Cuts Infrastructure Costs by 99% While Improving Team Productivity</p>
+        
+        <div class="problem-section">
+            <h2>The Traditional MLOps Problem</h2>
+            <div class="problem-list">
+                <div class="problem-item">📦 5GB Repositories</div>
+                <div class="problem-item">⏱️ 6-Hour Setup Time</div>
+                <div class="problem-item">💸 High Maintenance Costs</div>
+                <div class="problem-item">🔄 Environment Drift Issues</div>
+            </div>
+        </div>
+        
+        <div class="flow-arrows">⬇️ REVOLUTIONARY SOLUTION ⬇️</div>
+        
+        <div class="architecture-diagram">
+            <div class="component layer1">
+                <div class="layer-number">1</div>
+                <div class="icon">📋</div>
+                <h3>Configuration Layer</h3>
+                <div class="component-detail">
+                    <strong>Purpose:</strong> Store instructions, not installations
+                </div>
+                <div class="component-detail">
+                    <strong>Technology:</strong> GitHub Repository
+                </div>
+                <div class="component-detail">
+                    <strong>Contents:</strong> requirements.txt, .env templates, documentation
+                </div>
+                <div class="component-detail">
+                    <strong>Size:</strong> 50KB (vs 5GB traditional)
+                </div>
+                <div class="component-detail">
+                    <strong>Benefit:</strong> Permanent, shareable, version-controlled recipes
+                </div>
+            </div>
+            
+            <div class="component layer2">
+                <div class="layer-number">2</div>
+                <div class="icon">💻</div>
+                <h3>Execution Layer</h3>
+                <div class="component-detail">
+                    <strong>Purpose:</strong> Runtime development environment
+                </div>
+                <div class="component-detail">
+                    <strong>Technology:</strong> GitHub Codespace
+                </div>
+                <div class="component-detail">
+                    <strong>Contents:</strong> Running Python, 289 packages, VS Code interface
+                </div>
+                <div class="component-detail">
+                    <strong>Duration:</strong> Temporary, rebuilds from Layer 1
+                </div>
+                <div class="component-detail">
+                    <strong>Benefit:</strong> Zero local setup, browser-accessible, consistent
+                </div>
+            </div>
+            
+            <div class="component layer3">
+                <div class="layer-number">3</div>
+                <div class="icon">☁️</div>
+                <h3>Infrastructure Layer</h3>
+                <div class="component-detail">
+                    <strong>Purpose:</strong> AI services and cloud resources
+                </div>
+                <div class="component-detail">
+                    <strong>Technology:</strong> Azure OpenAI & Cloud Services
+                </div>
+                <div class="component-detail">
+                    <strong>Contents:</strong> GPT models, storage, compute resources
+                </div>
+                <div class="component-detail">
+                    <strong>Scaling:</strong> Pay-per-use, scales to zero when idle
+                </div>
+                <div class="component-detail">
+                    <strong>Benefit:</strong> Enterprise features without enterprise costs
+                </div>
+            </div>
+        </div>
+        
+        <div class="flow-arrows">⬇️ QUANTIFIED BUSINESS IMPACT ⬇️</div>
+        
+        <div class="results-section">
+            <h2>Proven Results: Real Implementation Data</h2>
+            <div class="metrics-grid">
+                <div class="metric">
+                    <span class="metric-number">99%</span>
+                    <div class="metric-label">Storage Reduction<br/>50KB vs 5GB repositories</div>
+                </div>
+                <div class="metric">
+                    <span class="metric-number">95%</span>
+                    <div class="metric-label">Faster Setup<br/>15 minutes vs 6 hours</div>
+                </div>
+                <div class="metric">
+                    <span class="metric-number">100%</span>
+                    <div class="metric-label">Environment Consistency<br/>Zero "works on my machine"</div>
+                </div>
+                <div class="metric">
+                    <span class="metric-number">$15</span>
+                    <div class="metric-label">Monthly Total Cost<br/>Complete learning program</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="linkedin-cta">
+            <h3>Transform Your MLOps Infrastructure Today</h3>
+            <p>This architecture scales seamlessly from individual learning projects to enterprise production environments. Professional capabilities without professional budgets. Enterprise patterns without enterprise complexity.</p>
+        </div>
+        
+        <div class="footer">
+            <p>Created as part of a comprehensive MLOps learning program.<br/>
+            <a href="https://linkedin.com/in/shapoor-marfatia" target="_blank">Connect on LinkedIn</a> | 
+            <a href="https://github.com/SMen1" target="_blank">View GitHub Projects</a></p>
+        </div>
+    </div>
+</body>
+</html>
